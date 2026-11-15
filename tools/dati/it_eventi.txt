@@ -1,0 +1,33 @@
+# n|titolo|opzione 1|opzione 2|opzione 3
+1|GLI AMERICANI SEQUESTRANO UNA NAVE BRITANNICA|Ignora|Scrivi una lettera indignata|Preparati alla guerra
+2|ARRIVI CON LA CRAVATTA SBAGLIATA|Dai la colpa al valletto|Torna a casa a cambiarti
+3|ATTENTATO ALLA VITA DI SUA MAESTÀ|Ignora|Esprimi preoccupazione|Prostrati
+4|I BOERI VINCONO UNA BATTAGLIA IN SUDAFRICA|Ignora|Offri concessioni|Studia una nuova strategia
+5|EPIDEMIA DI COLERA A LONDRA|Ignora|Fai evacuare Sua Maestà|Risana l'acquedotto
+6|DISASTRO IN UNA MINIERA DI CARBONE|Ignora|Consulta il ministro dell'Interno|Visita i sopravvissuti
+7|I MINATORI ENTRANO IN SCIOPERO|Ignora|Condanna|Trova una soluzione
+8|RIVOLTA NELLE COLONIE|Ignora|Recita una poesia di Mr. Kipling|Destituisci il governatore
+9|RACCOLTO PERDUTO|Ignora|Prometti aiuti
+10|IL GIORNO DEL DERBY|Non andarci|Metti il cappello buono e punta 5 sterline
+11|CARESTIA IN IRLANDA|Ignora|Esprimi cordoglio|Organizza i soccorsi
+12|INONDAZIONE NELLE MIDLANDS|Ignora|Cita la Bibbia|Visita la zona del disastro
+13|L'ESERCITO TEDESCO INVADE IL VICINO|Ignora|Condanna i parenti tedeschi della Regina|Media un accordo di pace
+14|INVITO A BALMORAL|Declina|Accetta
+15|JACK LO SQUARTATORE COLPISCE ANCORA|Ignora|Fai pressione sulla polizia|Destituisci il ministro dell'Interno
+16|VISITA DEL RE DEL BELGIO|Ignora|Pettegola al pranzo di Stato
+17|I PROPRIETARI VESSANO I CONTADINI IRLANDESI|Ignora|Consulta i Pari irlandesi|Apri un'inchiesta
+18|IL PRINCIPE DI GALLES COINVOLTO IN UNO SCANDALO|Ignora|Consiglia Sua Maestà|Scarica la colpa
+19|COMPLEANNO DELLA REGINA|Ignora|Manda i tuoi omaggi
+20|DISASTRO FERROVIARIO IN IRLANDA|Ignora|Chiedi un minuto di silenzio|Adotta un orfano
+21|DISASTRO FERROVIARIO IN SCOZIA|Ignora|Offri una preghiera|Sostieni nuove norme
+22|RIVOLTA IN INDIA|Ignora|Ammonisci il Viceré|Manda altre truppe
+23|RIVOLUZIONE IN FRANCIA|Ignora|Condanna|Offri asilo all'ex monarca
+24|TUMULTI NELL'EAST END|Ignora|Chiama l'esercito|Fai una visita di persona
+25|RIVOLTE DEL PANE IN IRLANDA|Ignora|Incontra gli inviati
+26|INVITO ALLE NOZZE REALI|Declina|Partecipa
+27|SCISMA NELLA CHIESA DI SCOZIA|Ignora|Consulta i deputati scozzesi|Incontra il clero a Edimburgo
+28|UN PARI SCOZZESE SI OFFENDE|Ignora|Chiedi scusa
+29|STALLO NELLA GUERRA CONTRO LA RUSSIA|Ignora|Dai la colpa all'esercito|Negozia un accordo
+30|LE SUFFRAGETTE TURBANO LA QUIETE|Ignora|Falle rinchiudere|Elogia la maternità
+31|AGITAZIONE FRA I FITTAVOLI|Ignora|Incontra i dimostranti
+32|TUA MOGLIE CHIEDE IL DIVORZIO|Ignora|Dai la colpa a lei|Riconciliati

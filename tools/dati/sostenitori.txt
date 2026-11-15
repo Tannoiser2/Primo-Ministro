@@ -1,0 +1,34 @@
+1|William Howley|Archbishop of Canterbury|p-G|X+C
+2|Duke of Argyll|Scottish Peer|X+S|D10
+3|Lord George Bentinck|Influential MP|D10|p-F
+4|Sarah Forbes Bonetta|Her Majesty's Goddaughter|Fv+1|pFv-2
+5|John Bright|Influential MP|D20 X-F|S+1
+6|John Brown|Her Majesty's Companion|p-S|Fv+2 S-1
+7|Isambard Kingdom Brunel|Engineer|p-C|X+F
+8|Thomas Carlyle|Intellectual|X+C X+C X-L|INF10
+9|Charles Darwin|Scientist|X+L X+L X-M|INF10
+10|Duke of Devonshire|Influential Peer|X+C X+C X-I|pS-1
+11|Charles Dickens|Author|X+L|p-M
+12|Sir Dadabhai Naoroji|Parsi Scholar & Liberal MP|D10|X+L
+13|William Booth|Founder of Salvation Army|X+F|X+W
+14|Cardinal Newman|Catholic Prelate|X+I|X+M
+15|Earl of Iddesleigh|Influential Peer|D10|X+C
+16|David Livingstone|Explorer|X+S|X+W
+17|Earl of Malmesbury|Influential Peer|X+C|INF20 X-L
+18|John Stuart Mill|Philosopher|D20 X-C|INF10
+19|Florence Nightingale|Founder of Nursing|X+M|p-W
+20|Daniel O'Connell|Irish Nationalist|X+I X+I X-C|p-I
+21|Duke of York|Her Majesty's Grandson|p-G|Fv+1
+22|Emmeline Pankhurst|Suffragette|X+L X+L X-C|p-L
+23|Prince Albert|Her Majesty's Consort|pFv~1|S+1
+24|Prince of Wales|Her Majesty's Son|pFv~1|INF10
+25|Princess Helena|Her Majesty's Daughter|pFv~1|X+G
+26|Princess of Wales||pFv~1|p-M
+27|C. P. Scott|Newspaper Publisher|D10|INF10
+28|Mary Shelley|Author|p-L|X+L X+L X-M
+29|Lord Alfred Tennyson|Poet Laureate|X+G|Fv+1
+30|W. M. Thackeray|Author|p-L|p-F
+31|Duke of Wellington|Former Prime Minister|INF10|S+1
+32|Duke of Westminster|Wealthy Peer|S+1|X+C
+33|Oscar Wilde|Author|X+I|X+G
+34|Earl Grey|Former Prime Minister|D10|S+1

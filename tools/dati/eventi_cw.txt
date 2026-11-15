@@ -1,0 +1,19 @@
+# num|condizione|cubi|effetto  (cond: ST<=12&HB>=340 ; LOSE = PM dato perdente alle prossime elezioni ; ST>=9&HB>=320)
+1|ST<=12&HB>=340|2|S+1
+2|ST<=12&HB>=340|2|S+1
+3|LOSE|1|C+C/L+L
+4|LOSE|1|C+F/L+W
+5|LOSE|1|C+G/L+I
+6|LOSE|1|X+M
+7|ST>=9&HB>=320|1|Fv+1
+8|ST>=9&HB>=320|1|X+M
+9|ST>=9&HB>=320|1|X+S
+10|ST>=9&HB>=320|1|X+F
+11|ST>=9&HB>=320|1|X+G
+12|ST>=9&HB>=320|1|X+I
+13|ST>=9&HB>=320|1|X+W
+14|ST>=9&HB>=320|1|C+C/L+L
+15|BYE|PM
+16|BYE|PM
+17|BYE|OPP
+18|BYE|OPP

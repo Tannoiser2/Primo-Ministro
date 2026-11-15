@@ -1,0 +1,77 @@
+# id|titolo italiano|sottotitolo italiano
+X1|Legge sui pesi e le misure|Legge per conservare i campioni dei pesi e delle misure
+X2|Legge sull'arsenico|Legge per regolare la vendita dell'arsenico
+X3|Legge sul diritto d'autore|Legge per estendere la tutela del diritto d'autore
+X4|Legge sulle sepolture|Legge per regolare i cimiteri
+X5|Legge sui cani|Legge per una maggiore protezione dai cani randagi e pericolosi
+X6|Legge sulla marina mercantile|Legge per migliorare i fari e le norme di navigazione
+X7|Legge sul risanamento del Tamigi|Legge per la costruzione di fogne più grandi a Londra
+X8|Legge sulla crudeltà verso gli animali|Legge per prevenire la crudeltà verso gli animali
+X9|Legge sulle licenze|Legge per regolare la vendita di bevande alcoliche
+X10|Legge sulla polizia metropolitana|Legge per migliorare la polizia della metropoli
+X11|Legge sul Nord America britannico|Legge per l'unione del Canada e il suo governo
+X12|Legge sul Commonwealth d'Australia|Legge per costituire il Commonwealth d'Australia
+X13|Legge sulla medicina|Legge per regolare chi esercita la medicina e la chirurgia
+X14|Legge sul governo dell'India|Legge per liquidare la Compagnia delle Indie e istituire il governo della Corona
+X15|Legge sulla diffamazione|Legge per rimedi più efficaci contro le parole diffamatorie
+X16|Legge sulla polizia (Scozia)|Legge per una polizia più efficace nelle contee e nei borghi di Scozia
+X17|Legge sull'Università di Oxford|Legge per migliorare il governo dell'Università di Oxford
+X18|Legge sulle miniere e le cave|Legge per vietare il lavoro nelle miniere di carbone ai minori di dieci anni
+X19|Legge sulla vaccinazione|Legge per la vaccinazione gratuita e obbligatoria dei bambini
+X20|Legge sugli spazzacamini|Legge per proibire l'impiego di bambini come spazzacamini
+X21|Legge sulle università (Scozia)|Legge per un miglior governo delle università di Scozia
+X22|Legge sulle biblioteche pubbliche|Legge per consentire ai consigli cittadini di istituire biblioteche pubbliche
+X23|Legge sugli atti parlamentari|Legge per concedere al Parlamento l'immunità dai procedimenti civili e penali
+X24|Legge sull'interpretazione|Legge per abbreviare il linguaggio usato nelle leggi del Parlamento
+X25|Legge sul castello di Windsor|Legge per migliorare il castello di Windsor
+X26|Legge sugli alimenti e i farmaci|Legge per assicurare la vendita di alimenti e farmaci non adulterati
+X27|Legge sui manicomi|Legge per migliorare i manicomi
+X28|Legge su proprietari e affittuari|Legge per migliorare il diritto fra proprietari e affittuari
+X29|Legge sulla sanità pubblica|Legge per promuovere la sanità pubblica in Gran Bretagna
+X30|Legge sulla sanità pubblica (Irlanda)|Legge per promuovere la sanità pubblica in Irlanda
+X31|Legge sulle tranvie|Legge per agevolare la costruzione di tranvie
+X32|Legge sul risanamento delle abitazioni|Legge per sgomberare i quartieri malsani
+X33|Legge sul telegrafo|Legge per consentire alle Poste di Sua Maestà di acquisire i telegrafi elettrici
+X34|Legge sulla selvaggina|Legge per permettere agli agricoltori di uccidere conigli e lepri
+X35|Legge sui poderi dei crofter (Scozia)|Legge per tutelare i diritti fondiari dei piccoli affittuari delle Highlands
+X36|Legge sulle elezioni parlamentari|Legge per prevenire le pratiche elettorali corrotte
+X37|Legge sui poveri (Scozia)|Legge per migliorare le leggi sui poveri in Scozia
+X38|Legge sull'istruzione elementare|Legge per migliorare l'istruzione dei fanciulli
+X39|Legge sui poveri (Irlanda)|Legge per un più efficace soccorso agli indigenti in Irlanda
+X40|Legge su padroni e operai|Legge per consentire agli operai di citare i padroni per violazione del contratto
+C1|Legge sui piccoli poderi|Legge per aiutare i fittavoli ad acquistare la propria terra
+C2|Legge sulle malattie contagiose|Legge per l'arresto e l'internamento delle prostitute malate
+C3|Legge sui reati contro la persona|Legge per inasprire le pene
+C4|Legge sulle pubblicazioni oscene|Legge per vietare le pubblicazioni oscene
+C5|Legge sulla calunnia delle donne|Legge per proteggere le donne dalle accuse di impudicizia
+C6|Legge sulla pirateria|Legge per incoraggiare la cattura delle navi pirata
+C7|Legge sul tradimento|Legge per una maggiore protezione della persona di Sua Maestà
+C8|Legge sui titoli reali|Legge che consente a Sua Maestà di assumere il titolo di «Imperatrice d'India»
+C9|Legge sulle prigioni|Legge per accentrare il controllo delle prigioni
+C10|Legge sui titoli ecclesiastici|Legge per limitare l'uso dei titoli ecclesiastici da parte della Chiesa cattolica
+C11|Legge di coercizione per l'Irlanda|Legge per reprimere i tumulti in Irlanda
+C12|Legge sui cortei di partito|Legge per limitare assemblee e marce in Irlanda
+C13|Legge sul vagabondaggio|Legge per la punizione di oziosi, furfanti e vagabondi
+C14|Legge sulle recinzioni|Legge per la recinzione e il miglioramento delle terre comuni
+C15|Legge sugli ubriachi|Legge per istituire riformatori per gli ubriaconi abituali
+C16|Legge sulla difesa navale|Legge per assicurare la supremazia navale britannica
+C17|Legge su padrone e servo|Legge per punire come reato la violazione del contratto da parte degli operai
+C18|Legge sui segreti di Stato|Legge per impedire la divulgazione dei segreti di Stato
+L1|Legge sui riformatori|Legge per destinare i giovani delinquenti al riformatorio
+L2|Legge sull'imposta sul reddito|Legge per tassare i redditi superiori a 150 sterline
+L3|Legge sui debitori insolventi|Legge per tutelare dal fallimento i debitori insolventi
+L4|Legge sui fanciulli nei campi|Legge per vietare il lavoro agricolo ai minori di otto anni
+L5|Legge sulle ferrovie|Legge per una migliore regolazione delle ferrovie
+L6|Legge sulla terra irlandese|Legge per proteggere gli affittuari in Irlanda
+L7|Legge sul voto segreto|Legge per istituire lo scrutinio segreto nelle elezioni parlamentari
+L8|Legge sui lavori forzati|Legge per sostituire la deportazione con altre pene
+L9|Legge sulle prove universitarie|Legge per porre fine alla discriminazione religiosa nelle università
+L10|Legge sulle fabbriche|Legge per limitare l'orario di lavoro di donne e fanciulli
+L11|Legge sulle importazioni|Legge per abrogare le leggi sul grano
+L12|Legge sulla tratta degli schiavi|Legge per una più efficace repressione della tratta degli schiavi
+L13|Legge sui beni delle donne sposate|Legge per consentire alle donne sposate di possedere beni
+L14|Legge sulla Chiesa d'Irlanda|Legge per separare dallo Stato la Chiesa protestante d'Irlanda
+L15|Legge sull'acquisto di terre (Irlanda)|Legge per ridistribuire la terra in Irlanda
+L16|Legge sulle cause matrimoniali|Legge che autorizza i tribunali civili a concedere il divorzio
+L17|Legge sul governo dell'Irlanda|Legge per istituire l'autogoverno in Irlanda
+L18|Legge sulla rappresentanza del popolo|Legge per allargare il corpo elettorale

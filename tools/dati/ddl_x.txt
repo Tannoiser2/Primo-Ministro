@@ -1,0 +1,40 @@
+1|Weights and Measures Act|An Act for Preserving the Standards of Weights and Measures|A|30|2|
+2|Arsenic Act|An Act to Regulate the Sale of Arsenic|A|30|2|
+3|Copyright Act|An Act to Extend Copyright Protection|A|30|2|
+4|Burial Act|An Act to Regulate Burial Grounds|A|20|2|
+5|Dogs Act|An Act to Provide Further Protection Against Stray and Dangerous Dogs|A|20|2|
+6|Merchant Shipping Act|An Act to Improve Lighthouses and Shipping Regulations|A|20|2|
+7|Thames Purification Act|An Act for the Construction of Larger Sewers in London|A|10|2|X+G
+8|Cruelty to Animals Act|An Act to Prevent Cruelty to Animals|A|10|2|X-F PMSUP2
+9|Licensing Act|An Act for Regulating the Sale of Intoxicating Liquors|A|10|2|X+M
+10|Metropolitan Police Act|An Act for Improving the Police in the Metropolis|A|10|2|X+G
+11|British North America Act|An Act for the Union of Canada and Government Thereof|A|0|2|PMSUP1
+12|Commonwealth of Australia Act|An Act to Constitute the Commonwealth of Australia|A|0|2|PMSUP1
+13|Medical Act|An Act to Regulate Practitioners of Medicine and Surgery|A|0|2|X+M
+14|Government of India Act|An Act to Liquidate the British East India Co. and Establish Crown Rule|A|0|2|PMF+1
+15|Libel Act|An Act for More Effectual Remedies Against Defamatory Words|A|0|2|X+G
+16|Police (Scotland) Act|An Act for More Effectual Police in Counties and Burghs in Scotland|A|0|2|X+S
+17|Oxford University Act|An Act to Improve the Government of the University of Oxford|A|-10|2|X+G
+18|Mines & Collieries Act|An Act to Ban Children Under Ten From Working in Coal Mines|A|-10|2|PMSUP1
+19|Vaccination Act|An Act for Free and Mandatory Vaccination of Children|A|-10|2|X+W
+20|Chimney Sweepers Act|An Act to Prohibit the Employment of Children as Chimney Sweepers|A|-20|2|PMSUP2
+21|Universities (Scotland) Act|An Act for the Better Government of the Universities of Scotland|A|-20|2|X+G X+S
+22|Public Libraries Act|An Act for Enabling Town Councils to Establish Public Libraries|A|-20|2|X+G X+M
+23|Parliamentary Papers Act|An Act to Grant Parliament Immunity from Civil and Criminal Proceedings|A|-30|2|PMS+1
+24|Interpretation Act|An Act for Shortening the Language Used in Acts of Parliament|A|-30|2|PMS+1
+25|Windsor Castle Act|An Act to Improve Windsor Castle|A|-30|2|X+G PMF+1
+26|Food and Drugs Act|An Act to Provide for the Sale of Food and Drugs in a Pure State|M|50|3|X+G X+M
+27|Lunacy Act|An Act to Improve Asylums|M|50|3|PMSUP2
+28|Landlord & Tenant Act|An Act to Improve the Law of Landlord and Tenant|M|40|3|X+F X+F X+I
+29|Public Health Act|An Act to Advance Public Health in Britain|M|40|3|X+M PMSUP1
+30|Public Health (Ireland) Act|An Act to Advance Public Health in Ireland|M|30|3|X+I X+I PMSUP1
+31|Tramways Act|An Act to Facilitate the Construction of Tramways|M|30|3|X+M X+W
+32|Dwellings Improvement Act|An Act to Clear Slums|M|20|3|X+I X+W PMSUP1
+33|Telegraph Act|An Act to Enable Her Majesty's Postmaster to Acquire Electric Telegraphs|M|20|3|X+F X+G X+M
+34|Ground Game Act|An Act to Allow Farmers to Kill Rabbits and Hares|M|20|3|X+F X+F X+W
+35|Crofter's Holdings (Scotland) Act|An Act to Protect Land Rights of Highland Crofters|M|10|3|X+F X+F X+S X+S
+36|Parliamentary Elections Act|An Act to Prevent Corrupt Election Practices|M|10|3|X+I X+W PMS+1
+37|Poor Law (Scotland) Act|An Act to Improve the Poor Laws of Scotland|M|10|3|X+S X+S X+W X+W
+38|Elementary Education Act|An Act to Improve the Education of Children|M|0|3|X+M X+M PMSUP2
+39|Poor Law (Ireland) Act|An Act for the More Effectual Relief of the Destitute Poor in Ireland|M|0|3|X+I X+I X+W X+W
+40|Employers & Workmen Act|An Act to Enable Workers to Sue Employers for Breach of Contract|M|0|3|X+W X+W X+F X+M

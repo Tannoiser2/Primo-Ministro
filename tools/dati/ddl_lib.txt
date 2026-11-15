@@ -1,0 +1,18 @@
+1|Reformatory Schools Act|An Act to Divert Juvenile Offenders to Reformatory School|A|0|2|C+C
+2|Income Tax Act|An Act to Tax Incomes Over £150|A|-10|4|C+C C+G L-G
+3|Insolvent Debtors Act|An Act to Provide Bankruptcy Protection to Insolvent Debtors|A|-10|3|C+C L-G
+4|Agricultural Children Act|An Act to Ban Agricultural Employment of Children Under Eight|A|-20|3|L-F L-I
+5|Railway Regulation Act|An Act for the Better Regulation of Railways|A|-20|3|C+C
+6|Irish Land Act|An Act to Protect Tenants in Ireland|A|-20|3|C+C C+G L+I
+7|Ballot Act|An Act to Establish Secret Ballots in Parliamentary Elections|A|-30|2|L-F L-G PMS+1
+8|Penal Servitude Act|An Act to Substitute Other Punishment in Lieu of Transportation|A|-30|4|C+F L-M
+9|Universities Tests Act|An Act to End Religious Discrimination in Universities|A|-30|4|L-C L-G
+10|Factory Act|An Act to Limit Working Hours for Women and Children|P|50|3|L-C
+11|Importation Act|An Act to Repeal the Corn Laws|P|40|7|C+F C+F L-F L-F L-F L+W
+12|Slave Trade Act|An Act for the More Effectual Suppression of the Slave Trade|P|30|3|
+13|Married Women's Property Act|An Act to Allow Married Women to Own Property|P|20|5|C+F L-I
+14|Irish Church Act|An Act to Disestablish the Protestant Church of Ireland|P|20|6|C+C C+M L-C
+15|Purchase of Land (Ireland) Act|An Act to Redistribute Land in Ireland|P|10|5|L+I L-G L-M
+16|Matrimonial Causes Act|An Act Authorising Civil Courts to Grant Divorce|P|10|6|C+I L+L L-C PMF-1
+17|Government of Ireland Act|An Act to Establish Home Rule in Ireland|P|0|7|C+C C+G L-G L-G L+I L+I
+18|Representation of the People Act|An Act to Expand the Electorate|P|0|6|C+G L-C

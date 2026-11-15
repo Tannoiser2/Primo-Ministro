@@ -1,0 +1,35 @@
+# n|ruolo in italiano
+1|Arcivescovo di Canterbury
+2|Pari scozzese
+3|Deputato influente
+4|Figlioccia di Sua Maestà
+5|Deputato influente
+6|Compagno di Sua Maestà
+7|Ingegnere
+8|Intellettuale
+9|Scienziato
+10|Pari influente
+11|Scrittore
+12|Studioso parsi e deputato liberale
+13|Fondatore dell'Esercito della Salvezza
+14|Prelato cattolico
+15|Pari influente
+16|Esploratore
+17|Pari influente
+18|Filosofo
+19|Fondatrice dell'assistenza infermieristica
+20|Nazionalista irlandese
+21|Nipote di Sua Maestà
+22|Suffragetta
+23|Consorte di Sua Maestà
+24|Figlio di Sua Maestà
+25|Figlia di Sua Maestà
+26|Nuora di Sua Maestà
+27|Editore di giornali
+28|Scrittrice
+29|Poeta laureato
+30|Scrittore
+31|Ex Primo Ministro
+32|Pari facoltoso
+33|Scrittore
+34|Ex Primo Ministro

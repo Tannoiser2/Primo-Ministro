@@ -1,0 +1,18 @@
+1|Small Holdings Act|An Act to Help Tenant Farmers Purchase Their Own Land|A|0|2|C+F C-G L+G
+2|Contagious Diseases Act|An Act for the Arrest and Confinement of Diseased Prostitutes|A|-10|3|C-L L+W
+3|Offences Against the Person Act|An Act to Expand Criminal Punishment|A|-10|3|C-W L+I L+L
+4|Obscene Publications Act|An Act to Ban Obscene Publications|A|-20|3|C-G L+W
+5|Slander of Women Act|An Act to Protect Women from Accusations of Unchastity|A|-20|2|
+6|Piracy Act|An Act to Encourage the Capture of Piratical Ships|A|-20|2|
+7|Treason Act|An Act Providing for the Further Protection of Her Majesty's Person|A|-30|3|C+G L+I L+L
+8|Royal Titles Act|An Act to Enable Her Majesty to Take the Title "Empress of India"|A|-30|3|C-L C-M PMF+1
+9|Prisons Act|An Act to Centralise Control of Prisons|A|-30|4|C-I C-W L+L
+10|Ecclesiastical Titles Act|An Act to Limit the Catholic Church's Use of Ecclesiastical Titles|P|50|5|C-I C-I C-L
+11|Irish Coercion Act|An Act to Suppress Riots in Ireland|P|40|5|C-I C-L L+I
+12|Party Processions Act|An Act to Restrain Assemblies and Marches in Ireland|P|30|6|C-I L+I L+L
+13|Vagrancy Act|An Act for the Punishment of Idle Persons, Rogues, and Vagabonds|P|20|6|C+G C-W C-W L+W
+14|Inclosure Act|An Act for the Inclosure and Improvement of Common Land|P|20|5|L+L L+W
+15|Inebriates Act|An Act to Establish Reformatories for Habitual Drunkards|P|10|5|C-W
+16|Naval Defence Act|An Act to Ensure British Naval Supremacy|P|10|7|C-I C-L L+L
+17|Master and Servant Act|An Act to Criminalise Breach of Contract by Workers|P|0|7|C+C C-M C-W L+L
+18|Official Secrets Act|An Act to Prevent the Disclosure of Official Secrets|P|0|5|
