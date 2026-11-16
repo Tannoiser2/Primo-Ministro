@@ -316,9 +316,15 @@ func _fase_round() -> void:
 		if pl == "opp_facile" and int(s["g"][i]["st"]) >= 11:
 			_pesca_sost(i)
 			_log("%s riceve un Sostenitore gratuito." % nome(i), i)
-		if "dpl" in s["g"][i]["carr"]:
+		if "dpl" in s["g"][i]["carr"] and s["g"][i]["ruolo"] == "bbo":
 			_pesca_sost(i)
 			_log("%s (Vice capo del partito) riceve un Sostenitore." % nome(i), i)
+	# il Vice Primo Ministro si fa passare un cubo dal PM che ne ha almeno tre
+	var vice := _ruolo("bbg")
+	if vice >= 0 and "dpl" in s["g"][vice]["carr"] and int(s["g"][pm()]["cubi"]) >= 3:
+		s["g"][pm()]["cubi"] = int(s["g"][pm()]["cubi"]) - 1
+		s["g"][vice]["cubi"] = int(s["g"][vice]["cubi"]) + 1
+		_log("%s (Vice Primo Ministro) riceve un cubo azione da %s." % [nome(vice), nome(pm())], vice)
 	_log("Round %d." % s["round"])
 	s["fase"] = "selezione" if s["tav"].is_empty() else "azioni"
 	s["sel"] = null
@@ -424,7 +430,7 @@ func _piazza(ids: Array) -> void:
 	for c in ids:
 		var d: Dictionary = Dati.ddl(c)
 		s["tav"].append({"id": c, "ret": int(d["ret"]), "dib": []})
-		nomi.append(str(d["titolo"]))
+		nomi.append(Testi.ddl_titolo(c))
 		if d["mazzo"] != "X" and s["patto"]:
 			_rompi_patto("%s presenta un disegno di legge di partito: il Patto è rotto." % nome(p))
 	for c in ids:
@@ -517,6 +523,7 @@ func _fine_turno(chi: int) -> void:
 	var t: Dictionary = s["turno"]
 	t["i"] = int(t["i"]) + 1
 	t["ini"] = false
+	t["rientro_chiesto"] = false
 
 # ---------- evento del PM
 
@@ -681,8 +688,10 @@ func azioni_possibili(chi: int) -> Array:
 		for o in 2:
 			out.append_array(_varianti_sost(chi, int(c), o, card["opz"][o]))
 		out.append({"t": "scarta", "c": int(c)})
-	if p["ruolo"] == "bbg" and not p["dim"] and int(p["pv"]) < 90 and cubi >= 1 and cubi == _cubi_turno(chi):
+	if p["ruolo"] == "bbg" and not p["dim"] and int(p["pv"]) < 90 and cubi >= 1 and cubi >= _cubi_turno(chi):
 		out.append({"t": "dimetti"})
+	if p["ruolo"] == "bbg" and p["dim"] and not s["turno"].get("rientro_chiesto", false):
+		out.append({"t": "rientra"})
 	if p["sost"].size() <= 4:
 		out.append({"t": "fine"})
 	return out
@@ -950,6 +959,14 @@ func _azione(chi: int, r: Dictionary) -> void:
 			_gioca_dibattito(chi, r)
 		"dimetti":
 			_dimetti(chi)
+		"rientra":
+			s["turno"]["rientro_chiesto"] = true
+			if umano(pm()):
+				s["att"] = {"tipo": "rientro", "posto": pm(), "bb": chi}
+			elif int(s["g"][pm()]["st"]) <= 9:
+				_rientra(chi)
+			else:
+				_log("%s rifiuta il rientro di %s nel Governo." % [nome(pm()), nome(chi)], pm())
 		"fine":
 			_fine_turno(chi)
 
