@@ -7,6 +7,8 @@ Si gioca da qui: https://tannoiser2.github.io/Primo-Ministro/
 
 ## Cosa c'è
 
+- **Tutorial**: una partita guidata contro il Clockwork più facile, con la visita del tabellone in otto tappe, una
+  lezione per ogni tipo di decisione, la mossa obbligata nei primi due round e poi un consiglio motivato a ogni mossa.
 - **Solitario contro il Clockwork** del regolamento ufficiale: Sistema I (sei sempre Primo Ministro, con la riserva)
   e Sistema II (il Clockwork può governare), con tutti e dieci i politici automatici e le loro carte.
 - **Partite da 2 a 4 giocatori** con le regole complete del gioco a più giocatori: Patto, Backbencher, carte Dibattito,
@@ -15,7 +17,8 @@ Si gioca da qui: https://tannoiser2.github.io/Primo-Ministro/
 - **Online con gli amici** (stanze con codice di 4 lettere su Firebase, radice `primoministro`) e **salvataggi**: sul
   dispositivo a ogni decisione, online a ogni round o dal menu della partita.
 - **Carte in italiano sulla grafica originale**: disegni di legge, eventi, sostenitori, carte Clockwork, politici.
-  Il tabellone è ridisegnato in italiano (settori, proiezioni elettorali, deputati, Favore, punteggio).
+  Il tabellone è quello originale con le scritte tradotte e i segnalini sopra (si ingrandisce con la rotella o con due
+  dita e si sposta trascinando); con «Cambia tabellone» si passa a uno schema più leggibile sugli schermi piccoli.
 
 ## Come è fatto
 
@@ -35,6 +38,7 @@ Si gioca da qui: https://tannoiser2.github.io/Primo-Ministro/
 
 ```
 godot --headless --path . -s tests/sim.gd -- 40        # partite automatiche in tutte le modalità
+godot --headless --path . -s tests/tutor.gd -- 40      # partite giocate seguendo i consigli del tutorial
 GODOT=godot tests/prova_online.sh                      # due istanze sulla stessa partita con un finto Firebase
 python3 tools/controlla_glifi.py
 ```
@@ -48,6 +52,5 @@ Il workflow *Pubblica* non parte a ogni modifica: si lancia a mano da Actions op
 
 - Scenari del regolamento (multigiocatore e Clockwork C1-C5).
 - Carta Dibattito del Capo dell'Opposizione nelle partite a tre.
-- Tabellone originale come sfondo, tradotto, con i segnalini sopra.
 
 Font: Milonga, Old Standard TT e Rye (SIL Open Font License, in `assets/font/`).

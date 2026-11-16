@@ -369,11 +369,15 @@ def carta_vuota(im, toppa, y0, y1):
         y += taglio
         giro += 1
 
+def trova_filetto(c, da, a):
+    """Riga del primo filetto dorato orizzontale fra le righe da..a (quello che chiude le opzioni dei cubi)."""
+    arr = np.asarray(c)[da:a, 150:680].astype(int)
+    oro = (abs(arr[..., 0] - 185) < 45) & (abs(arr[..., 1] - 133) < 45) & (arr[..., 2] < 110)
+    righe_ = np.where(oro.sum(axis=1) > 300)[0]
+    return da + int(righe_[0]) if len(righe_) else None
+
 def carte_clockwork(opp, pm, k):
     att, dif, difmp, pb, sel, selmp, par = CW[k]
-    toppa = opp.crop((40, 915, 785, 1050))
-    for c, ruolo in ((opp, "CAPO DELL'OPPOSIZIONE"), (pm, 'PRIMO MINISTRO')):
-        pass
     out = []
     for c, ruolo, lato in ((opp, "CAPO DELL'OPPOSIZIONE", 'opp'), (pm, 'PRIMO MINISTRO', 'pm')):
         c = cancella(c, (138, 310, 478, 354), True, soglia=None, allarga=3)
@@ -381,62 +385,137 @@ def carte_clockwork(opp, pm, k):
         for n, cx in enumerate((172, 410, 660)):
             c = cancella(c, (cx - 52, 466, cx + 52, 524), False)
             testo_c(c, '%d°' % (n + 1), cx, 495, 44)
+        yf = trova_filetto(c, 860, 1100)
         if lato == 'opp':
-            carta_vuota(c, toppa, 1095, 1290)
-            filetto(c, 1078)
-            filetto(c, 1304)
-            c = scrivi(c, "RAGGIO D'ATTACCO", (70, 1130, 320, 1250), 'OldStandard-Regular', 42, NERO_T, max_righe=2, interlinea=0.92)
-            esagono(c, 400, 1190, str(att[0]), 140, 122, 52)
-            testo_c(c, 'a', 525, 1186, 50)
-            esagono(c, 650, 1190, str(att[1]), 140, 122, 52)
+            toppa = c.crop((40, yf + 16, 785, yf + 30))   # carta vuota: sotto il filetto dell'Opposizione non c'è nulla
+        if lato == 'opp':
+            carta_vuota(c, toppa, yf + 16, 1290)
+            cy = (yf + 1300) // 2
+            c = scrivi(c, "RAGGIO D'ATTACCO", (70, cy - 60, 320, cy + 60), 'OldStandard-Regular', 42, NERO_T, max_righe=2, interlinea=0.92)
+            esagono(c, 400, cy, str(att[0]), 140, 122, 52)
+            testo_c(c, 'a', 525, cy - 4, 50)
+            esagono(c, 650, cy, str(att[1]), 140, 122, 52)
         else:
-            carta_vuota(c, toppa, 912, 1392)
-            filetto(c, 905)
+            y0 = yf + 16
+            carta_vuota(c, toppa, y0, 1392)
             filetto(c, 1396)
+            f = (1392 - y0) / 480.0
+            def Y(v):
+                return int(y0 + (v - 912) * f)
+            def Z(v):
+                return max(10, int(v * (0.55 + 0.45 * f)))
             mazzo = 'LIBERALI' if par == 'L' else 'CONSERVATORI'
             if difmp is None:
-                c = scrivi(c, 'RAGGIO DI DIFESA', (80, 935, 330, 1045), 'OldStandard-Regular', 40, NERO_T, max_righe=2, interlinea=0.92)
-                esagono(c, 410, 990, str(dif[0]))
-                testo_c(c, 'a', 520, 986, 48)
-                esagono(c, 640, 990, str(dif[1]))
+                c = scrivi(c, 'RAGGIO DI DIFESA', (80, Y(935), 330, Y(1045)), 'OldStandard-Regular', Z(40), NERO_T, max_righe=2, interlinea=0.92)
+                esagono(c, 410, Y(990), str(dif[0]), Z(124), Z(108), Z(46))
+                testo_c(c, 'a', 520, Y(986), Z(48))
+                esagono(c, 640, Y(990), str(dif[1]), Z(124), Z(108), Z(46))
             else:
-                testo_c(c, 'RAGGIO DI DIFESA', 412, 940, 36)
-                riquadro_tipo(c, 'A', 82, 1015, 50)
-                esagono(c, 170, 1015, str(dif[0]), 100, 88, 38)
-                testo_c(c, 'a', 242, 1011, 36)
-                esagono(c, 314, 1015, str(dif[1]), 100, 88, 38)
-                riquadro_tipo(c, 'M', 418, 990, 44)
-                riquadro_tipo(c, 'P', 418, 1040, 44)
-                esagono(c, 520, 1015, str(difmp[0]), 100, 88, 38)
-                testo_c(c, 'a', 592, 1011, 36)
-                esagono(c, 664, 1015, str(difmp[1]), 100, 88, 38)
+                testo_c(c, 'RAGGIO DI DIFESA', 412, Y(940), Z(36))
+                riquadro_tipo(c, 'A', 82, Y(1015), Z(50))
+                esagono(c, 170, Y(1015), str(dif[0]), Z(100), Z(88), Z(38))
+                testo_c(c, 'a', 242, Y(1011), Z(36))
+                esagono(c, 314, Y(1015), str(dif[1]), Z(100), Z(88), Z(38))
+                riquadro_tipo(c, 'M', 418, Y(1015) - Z(25), Z(44))
+                riquadro_tipo(c, 'P', 418, Y(1015) + Z(25), Z(44))
+                esagono(c, 520, Y(1015), str(difmp[0]), Z(100), Z(88), Z(38))
+                testo_c(c, 'a', 592, Y(1011), Z(36))
+                esagono(c, 664, Y(1015), str(difmp[1]), Z(100), Z(88), Z(38))
             d = ImageDraw.Draw(c)
-            d.line([(170, 1078), (655, 1078)], fill=ORO_C, width=3)
-            testo_c(c, 'PESCA I DISEGNI ' + mazzo, 412, 1118, 34)
-            w1 = testo_c(c, 'SE I PARTIGIANI', 330, 1172, 34)
-            riquadro_tipo(c, 'P', 330 + w1 / 2 + 44, 1172, 50)
+            d.line([(170, Y(1078)), (655, Y(1078))], fill=ORO_C, width=3)
+            testo_c(c, 'PESCA I DISEGNI ' + mazzo, 412, Y(1118), Z(34))
+            w1 = testo_c(c, 'SE I PARTIGIANI', 330, Y(1172), Z(34))
+            riquadro_tipo(c, 'P', 330 + w1 / 2 + 44, Y(1172), Z(50))
             x0 = 330 + w1 / 2 + 82
-            d.rectangle((x0, 1147, x0 + 132, 1197), fill=(196, 150, 208), outline=ORO_C, width=3)
-            testo_c(c, '\u2265 %d' % pb, x0 + 66, 1170, 36, colore=(40, 50, 120))
-            d.line([(170, 1228), (655, 1228)], fill=ORO_C, width=3)
+            d.rectangle((x0, Y(1172) - Z(25), x0 + 132, Y(1172) + Z(25)), fill=(196, 150, 208), outline=ORO_C, width=3)
+            testo_c(c, '\u2265 %d' % pb, x0 + 66, Y(1170), Z(36), colore=(40, 50, 120))
+            d.line([(170, Y(1228)), (655, Y(1228))], fill=ORO_C, width=3)
             if selmp is None:
-                c = scrivi(c, 'RAGGIO DI SELEZIONE', (130, 1252, 420, 1372), 'OldStandard-Regular', 40, NERO_T, max_righe=2, interlinea=0.92)
-                esagono(c, 548, 1312, '\u2265%d' % sel, 164, 122, 42)
+                c = scrivi(c, 'RAGGIO DI SELEZIONE', (130, Y(1252), 420, Y(1372)), 'OldStandard-Regular', Z(40), NERO_T, max_righe=2, interlinea=0.92)
+                esagono(c, 548, Y(1312), '\u2265%d' % sel, Z(164), Z(122), Z(42))
             else:
-                c = scrivi(c, 'RAGGIO DI SELEZIONE', (62, 1256, 270, 1368), 'OldStandard-Regular', 32, NERO_T, max_righe=2, interlinea=0.92)
-                riquadro_tipo(c, 'A', 312, 1312, 50)
-                esagono(c, 414, 1312, '\u2265%d' % sel, 134, 100, 31)
-                riquadro_tipo(c, 'M', 520, 1286, 44)
-                riquadro_tipo(c, 'P', 520, 1338, 44)
-                esagono(c, 640, 1312, '\u2265%d' % selmp, 134, 100, 31)
+                c = scrivi(c, 'RAGGIO DI SELEZIONE', (62, Y(1256), 270, Y(1368)), 'OldStandard-Regular', Z(32), NERO_T, max_righe=2, interlinea=0.92)
+                riquadro_tipo(c, 'A', 312, Y(1312), Z(50))
+                esagono(c, 414, Y(1312), '\u2265%d' % sel, Z(134), Z(100), Z(31))
+                riquadro_tipo(c, 'M', 520, Y(1312) - Z(26), Z(44))
+                riquadro_tipo(c, 'P', 520, Y(1312) + Z(26), Z(44))
+                esagono(c, 640, Y(1312), '\u2265%d' % selmp, Z(134), Z(100), Z(31))
         out.append(c)
     return out[0], out[1]
 
-def tabellone(src):
-    b = Image.open(os.path.join(src, 'img', 'i42.jpg')).convert('RGB')
-    salva(b, f'{A}/tabellone.webp', 3300, 86)
+def testo_arco(im, testo, cx, cy_apice, raggio, nome, px, colore, spaziatura=1.0):
+    """Scrive il testo lungo un arco di cerchio (centro sotto il testo), centrato sull'apice."""
+    import math
+    ft = font(nome, px)
+    d = ImageDraw.Draw(im)
+    larg = [d.textlength(ch, font=ft) * spaziatura for ch in testo]
+    tot = sum(larg)
+    asc, desc = ft.getmetrics()
+    ang = -tot / 2 / raggio
+    cyc = cy_apice + raggio
+    for ch, w in zip(testo, larg):
+        a = ang + w / 2 / raggio
+        if ch != ' ':
+            tile = Image.new('RGBA', (int(w + px), int(asc + desc + 8)), (0, 0, 0, 0))
+            ImageDraw.Draw(tile).text(((tile.size[0] - w / spaziatura) / 2, 4), ch, font=ft, fill=colore + (255,))
+            rot = tile.rotate(-math.degrees(a), resample=Image.BICUBIC, expand=True)
+            x = cx + raggio * math.sin(a)
+            y = cyc - raggio * math.cos(a)
+            im.paste(rot, (int(x - rot.size[0] / 2), int(y - rot.size[1] / 2)), rot)
+        ang += w / raggio
 
-PASSI = {'ddl': ddl, 'ev': eventi, 'sost': sostenitori, 'cw': clockwork, 'inc': incertezza, 'ico': None, 'pol': politici}
+def tabellone(src):
+    """Tabellone originale con tutte le scritte in italiano."""
+    b = Image.open(os.path.join(src, 'img', 'i42.jpg')).convert('RGB')
+    CR = (250, 244, 222)
+    # titolo e note del punteggio
+    b = cancella(b, (2190, 60, 3080, 222), True, soglia=170, allarga=5, raggio=7)
+    b = scrivi(b, 'PUNTEGGIO', (2100, 60, 3170, 226), 'Milonga-Regular', 150, CR, max_righe=1, ombra=(60, 10, 12))
+    b = cancella(b, (2280, 604, 2560, 688), True, soglia=150)
+    b = scrivi(b, 'NIENTE RINVIO DELLE ELEZIONI', (2230, 604, 2600, 690), 'OldStandard-Bold', 36, CR, max_righe=2, interlinea=0.9)
+    b = cancella(b, (3200, 604, 3600, 696), True, soglia=150)
+    b = scrivi(b, 'DECANO DELLA CAMERA, NIENTE DIMISSIONI', (3150, 604, 3650, 696), 'OldStandard-Bold', 36, CR, max_righe=2, interlinea=0.9)
+    # nastri dei settori
+    nastri = [(570, 785, 'CONSERVATORI'), (1565, 785, 'AGRICOLTORI'), (2520, 785, 'GENTRY'), (3475, 785, 'IRLANDA'),
+              (570, 2067, 'LIBERALI'), (1565, 2067, 'CETO MEDIO'), (2520, 2067, 'SCOZIA'), (3475, 2067, 'OPERAI')]
+    for cx, cy, nome in nastri:
+        b = cancella(b, (cx - 215, cy - 62, cx + 215, cy + 78), True, soglia=205, allarga=3, raggio=4)
+        testo_arco(b, nome, cx, cy - 6, 470, 'OldStandard-Bold', 46 if len(nome) > 9 else 52, (250, 248, 236), 1.06)
+    # proiezioni elettorali
+    b = cancella(b, (4215, 1070, 5065, 1265), False, soglia=85, allarga=5, raggio=6)
+    testo_arco(b, 'PROIEZIONI', 4650, 1168, 1030, 'Rye-Regular', 118, (38, 36, 34), 1.04)
+    b = cancella(b, (4368, 1256, 4915, 1362), False, soglia=85, allarga=4, raggio=5)
+    testo_arco(b, 'ELETTORALI', 4650, 1304, 980, 'OldStandard-Bold', 58, (38, 36, 34), 1.12)
+    b = cancella(b, (4012, 1498, 4222, 1590), True, soglia=170)
+    b = scrivi(b, 'PARI', (4010, 1498, 4224, 1592), 'OldStandard-Bold', 76, (236, 234, 228), max_righe=1)
+    # Favore e linguette
+    b = cancella(b, (5900, 118, 6475, 256), True, soglia=125, allarga=5, raggio=7)
+    b = scrivi(b, 'FAVORE', (5890, 118, 6480, 256), 'Rye-Regular', 122, (214, 164, 70), max_righe=1, ombra=(40, 26, 12))
+    for cx, cy, lung, nome, px in ((6517, 1200, 150, 'Patto', 52), (6508, 1985, 520, 'BB di Governo dimesso', 46)):
+        d = ImageDraw.Draw(b)
+        d.rectangle((cx - 40, cy - lung / 2, cx + 40, cy + lung / 2), fill=(2, 12, 6))
+        tile = Image.new('RGBA', (lung + 40, 90), (0, 0, 0, 0))
+        dt = ImageDraw.Draw(tile)
+        ft = font('Milonga-Regular', px)
+        w = dt.textlength(nome, font=ft)
+        dt.text(((tile.size[0] - w) / 2, 8), nome, font=ft, fill=(206, 160, 70, 255))
+        rot = tile.rotate(90, expand=True)
+        b.paste(rot, (int(cx - rot.size[0] / 2), int(cy - rot.size[1] / 2)), rot)
+    # deputati di Governo
+    for box, nome, px in (((5040, 3410, 6150, 3548), 'DEPUTATI DI GOVERNO', 120), ((5000, 3584, 5170, 3676), 'TUTTI', 60),
+                          ((5436, 3584, 5850, 3676), 'MODERATI', 60), ((6026, 3584, 6410, 3676), 'PARTIGIANI', 60),
+                          ((5200, 4912, 6010, 5016), '330 VOTI PER APPROVARE', 56)):
+        b = cancella(b, box, True, soglia=140, allarga=5, raggio=6)
+        b = scrivi(b, nome, (box[0] + (22 if px == 60 else -10), box[1], box[2] + 40, box[3]), 'OldStandard-Bold', px, (252, 240, 196), max_righe=1, allinea='c' if px != 60 else 's')
+    # caselle dei disegni di legge e segnalino delle elezioni
+    for sx in (449, 1537, 2624):
+        b = cancella(b, (sx - 190, 4200, sx + 190, 4380), True, soglia=150, allarga=5, raggio=6)
+        b = scrivi(b, 'LEGGE', (sx - 200, 4200, sx + 200, 4380), 'Milonga-Regular', 110, (236, 200, 170), max_righe=1)
+    b = cancella(b, (3770, 4448, 4252, 4580), False, soglia=95, allarga=5, raggio=6)
+    b = scrivi(b, 'ELEZIONI', (3770, 4444, 4254, 4582), 'Rye-Regular', 86, (44, 40, 34), max_righe=1)
+    salva(b, f'{A}/tabellone.webp', 3300, 88)
+
+PASSI = {'ddl': ddl, 'ev': eventi, 'sost': sostenitori, 'cw': clockwork, 'inc': incertezza, 'ico': None, 'pol': politici, 'tab': tabellone}
 
 # ---------------------------------------------------------------- icone
 def scontorna(im, toll=38):

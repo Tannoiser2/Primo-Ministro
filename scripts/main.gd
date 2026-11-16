@@ -24,6 +24,8 @@ var rete: Rete
 var schermo: Control
 var strato: Control
 var tab: Tabellone
+var tab_or: TabOriginale
+var vista_originale := true
 var box_giocatori: VBoxContainer
 var box_ddl: HBoxContainer
 var box_azioni: VBoxContainer
@@ -38,6 +40,8 @@ var online := {}
 var in_attesa := false
 var tempo_poll := 0.0
 var ultimo_round_salvato := 0
+## tutorial: {} se spento; altrimenti {intro: passo della visita, visti: lezioni già mostrate}
+var tut := {}
 
 func _ready() -> void:
 	rete = Rete.new()
@@ -235,8 +239,14 @@ func _titolo_grande(testo: String, px := 86) -> Label:
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	return l
 
+func _avvia_tutorial() -> void:
+	tut = {"intro": 0, "visti": []}
+	vista_originale = true
+	_nuova_partita(Tutor.CFG.duplicate(true))
+
 func _menu() -> void:
 	online = {}
+	tut = {}
 	m = null
 	var s := _cambia_schermo()
 	var c := CenterContainer.new()
@@ -254,6 +264,7 @@ func _menu() -> void:
 	v.add_child(sot)
 	v.add_child(_spazio(14))
 	var voci := [
+		["Tutorial: partita guidata", func(): _avvia_tutorial()],
 		["Solitario contro il Clockwork", func(): _prepara_solitario()],
 		["Partita a più giocatori (con IA)", func(): _prepara_multi(false)],
 		["Gioca online con gli amici", func(): _online_menu()],
@@ -553,7 +564,7 @@ func _riprendi_cloud() -> void:
 	_aggiorna()
 
 func _salva_locale() -> void:
-	if not online.is_empty() or m == null:
+	if not online.is_empty() or m == null or not tut.is_empty():
 		return
 	var f := FileAccess.open(FILE_PARTITA, FileAccess.WRITE)
 	if f != null:
@@ -596,6 +607,9 @@ func _tavolo() -> void:
 	barra_fase.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	barra_fase.clip_text = true
 	barra.add_child(barra_fase)
+	barra.add_child(_btn("Cambia tabellone", func():
+		vista_originale = not vista_originale
+		_applica_vista(), 220, 19))
 	barra.add_child(_btn("Regole", func(): _regole_in_gioco(), 130, 19))
 	barra.add_child(_btn("Menu", func(): _menu_in_gioco(), 120, 19))
 	v.add_child(barra)
@@ -629,6 +643,15 @@ func _tavolo() -> void:
 	tab.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	tab.custom_minimum_size = Vector2(700, 560)
 	cx.add_child(tab)
+	tab_or = TabOriginale.new()
+	tab_or.m = m
+	tab_or.f_titolo = f_titolo
+	tab_or.f_grassetto = f_grassetto
+	tab_or.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	tab_or.custom_minimum_size = Vector2(700, 560)
+	tab_or.carta_toccata.connect(_ingrandisci)
+	cx.add_child(tab_or)
+	_applica_vista()
 	# destra: decisioni e diario
 	var dx := VBoxContainer.new()
 	dx.add_theme_constant_override("separation", 8)
@@ -653,6 +676,14 @@ func _tavolo() -> void:
 	var pd := _pannello(diario, Color("f6f0dc"), 10)
 	pd.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	dx.add_child(pd)
+
+## Due modi di vedere il tavolo: il tabellone originale tradotto (si ingrandisce e si sposta) o lo schema leggibile.
+func _applica_vista() -> void:
+	tab.visible = not vista_originale
+	tab_or.visible = vista_originale
+	box_ddl.visible = not vista_originale
+	if m != null:
+		_aggiorna_ddl()
 
 func _menu_in_gioco() -> void:
 	var v := VBoxContainer.new()
@@ -695,6 +726,8 @@ func _aggiorna() -> void:
 		return
 	tab.m = m
 	tab.queue_redraw()
+	tab_or.m = m
+	tab_or.queue_redraw()
 	_aggiorna_barra()
 	_aggiorna_giocatori()
 	_aggiorna_ddl()
@@ -920,6 +953,8 @@ func _aggiorna_azioni() -> void:
 	if not _mio(chi):
 		_titolo_azioni("In attesa", "Tocca a %s (%s)." % [m.nome(chi), Testi.ruolo(str(m.s["g"][chi]["ruolo"]))])
 		return
+	if not tut.is_empty() and _ui_tutorial(a):
+		return
 	var umani_locali := 0
 	for i in m.s["g"].size():
 		if _mio(i):
@@ -936,6 +971,103 @@ func _aggiorna_azioni() -> void:
 		"elezione": _ui_elezione(chi)
 		"premio": _ui_premio(chi, a)
 		_: _ui_si_no(chi, a)
+
+# ---------- tutorial
+
+func _testo_tutor(testo: String, px := 19) -> void:
+	box_azioni.add_child(_lbl(testo, px, INCHIOSTRO, null, 410))
+
+## Mostra la parte del tutorial per la decisione in attesa. Restituisce true se occupa tutto il pannello.
+func _ui_tutorial(a: Dictionary) -> bool:
+	var passo: int = tut["intro"]
+	if passo < Tutor.INTRO.size():
+		var p: Dictionary = Tutor.INTRO[passo]
+		if not vista_originale:
+			vista_originale = true
+			_applica_vista()
+		tab_or.zoom = float(p["z"])
+		tab_or.centro = Vector2(p["c"][0], p["c"][1])
+		tab_or.queue_redraw()
+		box_azioni.add_child(_lbl("Visita guidata  %d di %d" % [passo + 1, Tutor.INTRO.size()], 17, Color("5b4a44"), f_corsivo))
+		_titolo_azioni(str(p["t"]))
+		_testo_tutor(str(p["x"]), 20)
+		var h := HBoxContainer.new()
+		h.add_theme_constant_override("separation", 8)
+		if passo > 0:
+			h.add_child(_btn_chiaro("Indietro", func():
+				tut["intro"] = passo - 1
+				_aggiorna_azioni(), 150))
+		h.add_child(_btn("Avanti" if passo < Tutor.INTRO.size() - 1 else "Comincia la partita", func():
+			tut["intro"] = passo + 1
+			if passo + 1 >= Tutor.INTRO.size():
+				tab_or.zoom = 1.0
+				tab_or.centro = Vector2(3300, 2550)
+				tab_or.queue_redraw()
+			_aggiorna_azioni(), 250))
+		box_azioni.add_child(h)
+		return true
+	var c := Tutor.consiglio(m)
+	var r: Dictionary = c["r"]
+	var guidato: bool = int(m.s["round"]) <= Tutor.ROUND_GUIDATI
+	var lezione := ""
+	for k in Tutor.lezioni_per(m, str(a["tipo"]), r):
+		if not (k in tut["visti"]):
+			lezione = k
+			break
+	if lezione != "":
+		# la lezione si legge con calma: un passo alla volta
+		var testo: String = Tutor.LEZIONI[lezione]
+		var a_capo := testo.find("\n")
+		box_azioni.add_child(_lbl("Lezione", 17, Color("5b4a44"), f_corsivo))
+		_titolo_azioni(testo.substr(0, 1) + testo.substr(1, a_capo - 1).to_lower() if a_capo > 0 else "Lezione")
+		_testo_tutor(testo.substr(a_capo + 1) if a_capo > 0 else testo, 20)
+		_mostra_contesto(a)
+		box_azioni.add_child(_btn("Ho capito", func():
+			tut["visti"].append(lezione)
+			_aggiorna_azioni(), 410))
+		return true
+	var pan := VBoxContainer.new()
+	pan.add_theme_constant_override("separation", 6)
+	pan.add_child(_lbl("Il consiglio del tutor" if not guidato else "Round guidato: fai questa mossa", 21, VERDE, f_grassetto, 380))
+	pan.add_child(_lbl(str(c["perche"]), 18, INCHIOSTRO, f_corsivo, 380))
+	var b := _btn_testo_lungo(Tutor.descrivi(m, r), func(): _rispondi(r))
+	b.custom_minimum_size.x = 380
+	pan.add_child(b)
+	box_azioni.add_child(_pannello(pan, Color("e4eed8"), 10))
+	if guidato:
+		_mostra_contesto(a)
+		return true
+	box_azioni.add_child(_btn_chiaro("Chiudi il tutorial e gioca da solo", func():
+		tut = {}
+		_aggiorna_azioni(), 410))
+	return false
+
+## Le carte di cui parla la decisione, da guardare mentre si legge.
+func _mostra_contesto(a: Dictionary) -> void:
+	match str(a["tipo"]):
+		"evento":
+			var c := _carta("res://assets/carte/ev/%d.webp" % int(a["n"]), 330)
+			c.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			box_azioni.add_child(c)
+		"scegli", "proponi":
+			_fila_ddl(m.s["sel"]["riv"] if a["tipo"] == "scegli" else m.s["sel"]["mano"], false)
+		"pesca":
+			var sel: Dictionary = m.s["sel"]
+			_fila_ddl(sel["riv"], false)
+		"tieni":
+			var h := HBoxContainer.new()
+			h.add_theme_constant_override("separation", 8)
+			for c in a["carte"]:
+				h.add_child(_carta("res://assets/carte/sost/%d.webp" % int(c), 280))
+			box_azioni.add_child(h)
+		"azione":
+			var p: Dictionary = m.s["g"][int(a["posto"])]
+			if not p["sost"].is_empty():
+				var fl := HFlowContainer.new()
+				fl.custom_minimum_size.x = 410
+				for c in p["sost"]:
+					fl.add_child(_carta("res://assets/carte/sost/%d.webp" % int(c), 184))
+				box_azioni.add_child(fl)
 
 func _ui_si_no(chi: int, a: Dictionary) -> void:
 	var tipo := str(a["tipo"])
@@ -1503,6 +1635,18 @@ func _prova(quale: String) -> void:
 		"online":
 			_online_menu()
 			return
+		"tutorial":
+			_avvia_tutorial()
+			var n_intro := int(OS.get_environment("PM_INTRO")) if OS.get_environment("PM_INTRO") != "" else 0
+			tut["intro"] = n_intro
+			for k in int(OS.get_environment("PM_PASSI")) if OS.get_environment("PM_PASSI") != "" else 0:
+				if m.s["att"] == null or m.s["fine"] != null:
+					break
+				tut["visti"] = Tutor.LEZIONI.keys() if OS.get_environment("PM_LEZIONI") == "no" else tut["visti"]
+				m.rispondi(Tutor.consiglio(m)["r"])
+				m.avanza()
+			_aggiorna()
+			return
 		"multi4":
 			cfg = {"modo": "multi", "seme": 5, "posti": [{"pol": "melbourne", "tipo": "u"}, {"pol": "derby", "tipo": "cw"}, {"pol": "gladstone", "tipo": "cw"}, {"pol": "disraeli", "tipo": "cw"}]}
 	m = Motore.nuova(cfg)
@@ -1530,6 +1674,13 @@ func _prova(quale: String) -> void:
 	_tavolo()
 	_aggiorna()
 	var ap := OS.get_environment("PM_APRI")
+	if OS.get_environment("PM_VISTA") == "schema":
+		vista_originale = false
+		_applica_vista()
+	var zz := OS.get_environment("PM_ZOOM").split(",")
+	if zz.size() == 3:
+		tab_or.zoom = float(zz[0])
+		tab_or.centro = Vector2(float(zz[1]), float(zz[2]))
 	if ap == "sost" and m.s["att"] != null and not m.s["g"][0]["sost"].is_empty():
 		_apri_sostenitore(0, int(m.s["g"][0]["sost"][0]))
 	elif ap != "":
