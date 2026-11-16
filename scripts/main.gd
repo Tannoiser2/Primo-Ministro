@@ -985,9 +985,8 @@ func _ui_tutorial(a: Dictionary) -> bool:
 		if not vista_originale:
 			vista_originale = true
 			_applica_vista()
-		tab_or.zoom = float(p["z"])
-		tab_or.centro = Vector2(p["c"][0], p["c"][1])
-		tab_or.queue_redraw()
+		var zona := Rect2(p["r"][0], p["r"][1], p["r"][2], p["r"][3])
+		tab_or.inquadra.call_deferred(zona)
 		box_azioni.add_child(_lbl("Visita guidata  %d di %d" % [passo + 1, Tutor.INTRO.size()], 17, Color("5b4a44"), f_corsivo))
 		_titolo_azioni(str(p["t"]))
 		_testo_tutor(str(p["x"]), 20)
@@ -1000,9 +999,7 @@ func _ui_tutorial(a: Dictionary) -> bool:
 		h.add_child(_btn("Avanti" if passo < Tutor.INTRO.size() - 1 else "Comincia la partita", func():
 			tut["intro"] = passo + 1
 			if passo + 1 >= Tutor.INTRO.size():
-				tab_or.zoom = 1.0
-				tab_or.centro = Vector2(3300, 2550)
-				tab_or.queue_redraw()
+				tab_or.inquadra(Rect2(0, 0, 6600, 5100))
 			_aggiorna_azioni(), 250))
 		box_azioni.add_child(h)
 		return true

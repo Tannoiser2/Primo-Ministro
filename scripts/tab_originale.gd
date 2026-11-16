@@ -50,6 +50,16 @@ func _limita() -> void:
 	centro.x = clampf(centro.x, minf(mezzo.x, LARG / 2.0), maxf(LARG - mezzo.x, LARG / 2.0))
 	centro.y = clampf(centro.y, minf(mezzo.y, ALT / 2.0), maxf(ALT - mezzo.y, ALT / 2.0))
 
+## Inquadra una zona del tabellone (coordinate dell'immagine originale), qualunque sia la forma del riquadro.
+func inquadra(r: Rect2) -> void:
+	var base := minf(size.x / LARG, size.y / ALT)
+	if base <= 0.0:
+		return
+	zoom = clampf(minf(size.x / r.size.x, size.y / r.size.y) / base, 1.0, 6.0)
+	centro = r.get_center()
+	_limita()
+	queue_redraw()
+
 func _zoom_su(punto: Vector2, fattore: float) -> void:
 	var prima := (punto - _origine()) / _scala()
 	zoom = clampf(zoom * fattore, 1.0, 6.0)

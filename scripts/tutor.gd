@@ -6,23 +6,23 @@ extends RefCounted
 const ROUND_GUIDATI := 2
 const CFG := {"modo": "cw2", "seme": 1001, "umano_pm": true, "posti": [{"pol": "gladstone", "tipo": "u"}, {"pol": "aberdeen", "tipo": "cw"}]}
 
-## Visita del tabellone: titolo, testo, zoom e centro (coordinate del tabellone originale).
+## Visita del tabellone: titolo, testo e zona da inquadrare (x, y, larghezza, altezza sul tabellone originale).
 const INTRO := [
-	{"t": "Benvenuto a Westminster", "z": 1.0, "c": [3300, 2550],
+	{"t": "Benvenuto a Westminster", "r": [0, 0, 6600, 5100],
 		"x": "Sei W.E. Gladstone, Primo Ministro liberale della regina Vittoria. Di fronte hai il Conte di Aberdeen, capo dell'Opposizione conservatrice, guidato dal sistema Clockwork del gioco.\n\nIn questa partita guidata ti spiego ogni cosa quando serve. Nei primi due round ti indico io la mossa da fare; poi giochi tu, e io resto qui con un consiglio.\n\nPrima, un giro del tabellone: lo puoi sempre ingrandire con la rotella o pizzicando con due dita, e spostare trascinandolo."},
-	{"t": "Il punteggio", "z": 2.3, "c": [2600, 420],
+	{"t": "Il punteggio", "r": [0, 0, 5300, 740],
 		"x": "Vince chi arriva a 100 Punti Vittoria mentre è Primo Ministro. Chi li raggiunge dall'Opposizione deve prima conquistare il Governo.\n\nI punti arrivano soprattutto dai disegni di legge approvati, dalle elezioni vinte e, a ogni round, dal semplice fatto di governare (4 punti) o di fare opposizione (2 punti).\n\nI segnalini con l'iniziale sono i giocatori: G sei tu, A è Aberdeen, che nel solitario parte con 5 punti."},
-	{"t": "I settori dell'elettorato", "z": 1.9, "c": [1900, 1950],
+	{"t": "I settori dell'elettorato", "r": [0, 640, 3950, 2720],
 		"x": "Otto settori: Conservatori, Agricoltori, Gentry, Irlanda, Liberali, Ceto medio, Scozia, Operai. In ognuno i due partiti hanno un disco: blu i Conservatori, arancio i Liberali (il tuo partito).\n\nIl numero accanto al disco sono i punti Popolarità che quel settore ti dà. Più sali, più ne hai. Si sale con l'azione Campagna, con molti disegni di legge e con i Sostenitori.\n\nI numeri su fondo viola sono i deputati Partigiani che quel settore ti garantisce dopo le elezioni: li vedremo fra poco."},
-	{"t": "Le proiezioni elettorali", "z": 2.3, "c": [4650, 1950],
+	{"t": "Le proiezioni elettorali", "r": [3900, 720, 1480, 2620],
 		"x": "Si sommano i punti Popolarità di ogni partito: la differenza dice quanti seggi prenderebbe chi è in testa se si votasse oggi. Per esempio, con 9 o 10 punti di vantaggio: 347 seggi contro 311.\n\nServono 330 seggi su 658 per governare. La casella evidenziata è la proiezione di adesso: si parte alla pari, 329 a 329.\n\nLe elezioni arrivano quando hai risolto tutti i disegni di legge in discussione. Le puoi rinviare una volta sola."},
-	{"t": "Il Favore di Sua Maestà", "z": 2.0, "c": [5700, 1600],
+	{"t": "Il Favore di Sua Maestà", "r": [5250, 0, 1350, 3300],
 		"x": "La Regina ha le sue simpatie. Il Favore va da 0 a 8 e conta in tre momenti:\n\n1. Nelle sfide: a parità di Standing, vince lo sfidante solo se ha almeno lo stesso Favore.\n2. Nelle elezioni finite 329 pari: governa chi ha più Favore.\n3. Nell'Interferenza Reale: con certe carte Incertezza il favorito può governare anche in minoranza.\n\nSi guadagna con l'azione Lusinga (Gladstone non ce l'ha: era notoriamente antipatico alla Regina), con alcuni eventi e disegni di legge."},
-	{"t": "I deputati di Governo", "z": 2.5, "c": [5600, 4200],
+	{"t": "I deputati di Governo", "r": [4700, 3350, 1850, 1750],
 		"x": "Il tuo Governo ha 330 deputati (colonna A, Tutti): 270 Moderati (M) e 60 Partigiani (P). I segnalini dorati indicano le cifre: 3 e 30 fanno 330.\n\nOgni disegno di legge conta su un gruppo diverso: quelli di tipo A su tutti i deputati, quelli M sui soli Moderati, quelli P sui soli Partigiani. Per questo i disegni di partito, che di solito sono A o P, sono più difficili da far passare.\n\nCon l'azione Influenza puoi spostare 10 deputati da un gruppo all'altro."},
-	{"t": "I disegni di legge", "z": 2.2, "c": [1700, 4300],
+	{"t": "I disegni di legge", "r": [0, 3540, 3420, 1560],
 		"x": "Qui stanno i tre disegni in discussione. Accanto a ognuno c'è la colonna delle rettifiche, da +100 a -80: il cerchio bianco indica la rettifica attuale.\n\nVoti previsti = deputati del gruppo giusto + rettifica. Per approvare servono 330 voti.\n\nCon 350 o più il disegno passa di sicuro. Fra 320 e 340 si pesca una carta Incertezza: a 340 passa 5 volte su 6, a 330 una su 2, a 320 una su 6. Sotto 320 non si può nemmeno votare.\n\nL'azione Dibattito sposta la rettifica: tu la alzi, l'Opposizione la abbassa."},
-	{"t": "I politici", "z": 1.0, "c": [3300, 2550],
+	{"t": "I politici", "r": [0, 0, 6600, 5100],
 		"x": "A sinistra ci sono i due politici. Lo Standing è il prestigio di ciascuno: decide quanti cubi azione ricevi a ogni round (2 di base, 3 se superi 8, 4 se superi 12) e, soprattutto, le sfide.\n\nSe il capo dell'Opposizione ha più Standing di te (o lo stesso, con almeno il tuo Favore) ti sfida e ti toglie il Governo. Tu parti da 11, lui da 5: ogni disegno bocciato o ritirato ti avvicina a lui.\n\nSotto c'è la carta Clockwork di Aberdeen: per ogni suo cubo esegue la prima opzione utile dall'alto in basso. Toccala per ingrandirla.\n\nSi comincia!"},
 ]
 
